@@ -1,0 +1,38 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+//NOT DB_OriginIntroductions("RedPrince","RedPrince_Presentation","RedPrince_Presentation_Music","RedPrince_Presentation_SFX");
+//DB_OriginIntroductions("RedPrince","Ifan_Presentation","RedPrince_Presentation_Music","RedPrince_Presentation_SFX");
+KBSECTION
+/*
+IF
+DB_Illusionist(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, _RespecMirror)
+THEN
+ClearTag(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "LIZARD");
+
+IF
+CharacterCreationFinished(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+THEN
+ProcObjectTimer(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Timers_LLREDPRINCE_ResetLizardTag", 250);
+
+PROC
+ProcObjectTimerFinished(_Char, "Timers_LLREDPRINCE_ResetLizardTag")
+THEN
+SetTag(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "LIZARD");
+*/
+
+/*
+QRY
+QRY_IsTrueRace((CHARACTERGUID)CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Human")
+THEN
+DB_NOOP(1);
+*/
+
+IF
+CharacterCharacterEvent(_Dreamer,_Player,"ARX_HorrorSleep_Warzone_MainDreamerStartDialog")
+THEN
+PROC_StartDialog_WithVisibleTag(_Dreamer,_Player,"ARX_HorrorSleep_WarZone_LizardDreamer_1","RED_PRINCE","HUMAN",1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "DOS2ModWrapper"

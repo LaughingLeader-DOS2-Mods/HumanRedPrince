@@ -1,0 +1,15 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+GameStarted(_,_)
+THEN
+ProcObjectTimerCancel(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Timers_LLREDPRINCE_RaceFixStart");
+ProcObjectTimer(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Timers_LLREDPRINCE_RaceFixStart", 250);
+GoalCompleted;
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_HumanRedPrince"

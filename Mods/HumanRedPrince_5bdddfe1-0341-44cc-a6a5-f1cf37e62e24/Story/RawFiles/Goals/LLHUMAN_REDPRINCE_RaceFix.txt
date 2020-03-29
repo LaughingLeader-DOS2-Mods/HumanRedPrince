@@ -1,0 +1,135 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFixStart")
+AND
+IsTagged(_Char, "HERO", 1)
+THEN
+DB_LLREDPRINCE_RaceFix_Temp_Tags(_Char, "HERO");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFixStart")
+AND
+IsTagged(_Char, "VILLAIN", 1)
+THEN
+DB_LLREDPRINCE_RaceFix_Temp_Tags(_Char, "VILLAIN");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFixStart")
+THEN
+ClearTag(_Char, "LIZARD");
+ClearTag(_Char, "REALLY_LIZARD");
+CharacterTransform(_Char, "S_Player_RedPrince_LLREDPRINCE_Template_2498c9e9-6aa2-4737-adc8-e1f5221feaaa", 0, 0, 0, 0, 0, 0, 1);
+CharacterApplyRacePreset(_Char, "RedPrince");
+ProcObjectTimer(_Char, "Timers_LLREDPRINCE_RaceFix", 70);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix")
+AND
+DB_LLHUMAN_REDPRINCE_RaceFix_Temp_ChosenPreset(_Char, _Preset)
+THEN
+NOT DB_LLHUMAN_REDPRINCE_RaceFix_Temp_ChosenPreset(_Char, _Preset);
+CharacterApplyPreset(_Char, _Preset);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix")
+THEN
+ProcObjectTimer(_Char, "Timers_LLREDPRINCE_RaceFix2", 70);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+AND
+DB_OriginProfessionTags(_Char, _Tag)
+THEN
+SetTag(_Char, _Tag);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+AND
+DB_LLREDPRINCE_RaceFix_Temp_Tags(_Char, _Tag)
+THEN
+SetTag(_Char, _Tag);
+NOT DB_LLREDPRINCE_RaceFix_Temp_Tags(_Char, _Tag);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+THEN
+SetTag(_Char, "RED_PRINCE");
+SetTag(_Char, "HUMAN");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+AND
+DB_IsPlayer(_Char)
+THEN
+CharacterMakePlayer(_Char);
+MakePlayerActive(_Char);
+OpenMessageBox(_Char, "LLREDPRINCE_Notifications_RaceFixed");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+AND
+NOT DB_IsPlayer(_Char)
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+OpenMessageBox(_Char, "LLREDPRINCE_Notifications_RaceFixed");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+AND
+NOT DB_IsPlayer(_Char)
+THEN
+CharacterMakePlayer(_Char);
+CharacterMakeNPC(_Char);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+AND
+DB_IsPlayer(_Char)
+AND
+ObjectExists(ITEMGUID_S_CMP_FTJ_Mirror_b6fb8ffd-c80e-44d3-b6c9-1ccc56764c18, 1)
+THEN
+LLREDPRINCE_RaceFix_AddToRespec(_Char, ITEMGUID_S_CMP_FTJ_Mirror_b6fb8ffd-c80e-44d3-b6c9-1ccc56764c18);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+AND
+DB_IsPlayer(_Char)
+AND
+ObjectExists(ITEMGUID_S_CMP_FTJ_Mirror_b6fb8ffd-c80e-44d3-b6c9-1ccc56764c18, 0)
+AND
+ObjectExists(ITEMGUID_S_LV_Mirror_6ca9a17e-6c68-4232-b4f2-8ef60f5085ee, 1)
+THEN
+LLREDPRINCE_RaceFix_AddToRespec(_Char, ITEMGUID_S_LV_Mirror_6ca9a17e-6c68-4232-b4f2-8ef60f5085ee);
+
+PROC
+LLREDPRINCE_RaceFix_AddToRespec((CHARACTERGUID)_Char, (ITEMGUID)_Mirror)
+AND
+NOT DB_Illusionist(_,_)
+AND
+NOT DB_CombatCharacters(_Char,_)
+THEN
+DB_Illusionist(_Char,_Mirror);
+CharacterItemSetEvent(_Char, _Mirror, "GEN_Homestead_CharCreationMirror");
+
+PROC
+LLREDPRINCE_RaceFix_AddToRespec((CHARACTERGUID)_Char, (ITEMGUID)_Mirror)
+AND
+DB_Illusionist(_Char,_Mirror)
+AND
+CharacterAddToCharacterCreation(_Char,2,_Result)
+THEN
+PROC_HandleMagicMirrorResult(_Char,_Result);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLREDPRINCE_RaceFix2")
+THEN
+DB_LLREDPRINCE_RaceFixed(1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "Start"

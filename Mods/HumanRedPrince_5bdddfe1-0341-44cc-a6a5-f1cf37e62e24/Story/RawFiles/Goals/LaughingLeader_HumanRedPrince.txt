@@ -1,0 +1,42 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+RegionStarted("TestLevel_LL_HumanRedPrince")
+THEN
+SysActivateGoal("LLHUMAN_REDPRINCE_Debug");
+
+QRY
+LLREDPRINCE_QRY_IsLizardRace((CHARACTERGUID)_Char)
+AND
+IsTagged(_Char, "LIZARD", 1)
+AND
+NOT CharacterIsPolymorphedInto(_Char, "Lizard", 1)
+AND
+NOT CharacterIsPolymorphedInto(_Char, "Undead_Lizard", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLREDPRINCE_QRY_IsLizardRace((CHARACTERGUID)_Char)
+AND
+IsTagged(_Char, "REALLY_LIZARD", 1)
+AND
+NOT CharacterIsPolymorphedInto(_Char, "Lizard", 1)
+AND
+NOT CharacterIsPolymorphedInto(_Char, "Undead_Lizard", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLREDPRINCE_QRY_IsLizardRace((CHARACTERGUID)_Char)
+AND
+CharacterGetRace(_Char, 0, "Lizard")
+THEN
+DB_NOOP(1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "Start"

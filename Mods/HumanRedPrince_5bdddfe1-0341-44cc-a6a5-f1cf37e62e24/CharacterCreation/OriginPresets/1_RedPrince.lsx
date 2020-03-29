@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1387205254" />
+    <version major="1" minor="3" revision="0" build="0" />
+    <region id="CharacterCreationManager">
+        <node id="root">
+            <children>
+                <node id="OriginDesc">
+                	<attribute id="OriginDisplayName" value="The Red Prince" handle="h82de0040g23f7g45c6gb72agb2b243c73b11" type="28" />
+                    <attribute id="OriginName" value="RedPrince" type="22" />
+                	<attribute id="OriginDescription" value="Unique among your own kind, you are a prince exiled from your Empire. This land is hostile, its inhabitants inferior, but no one will stop your march to vindication." handle="hfd87a628g8b16g44a3gac9bg08d0e72d536c" type="28" />
+                	<attribute id="OriginLongDescription" value="| Red Prince Origin Long Description |" handle="h68ac6946g74a8g492eg999eg94b756a5377e" type="28" />
+					<attribute id="CharacterUUID" value="a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f" type="22" />
+                    <attribute id="UserCanAlterTags" value="0" type="19" />
+                    <attribute id="SkillSet" value="Avatar_RedPrince" type="22" />
+                    <attribute id="DefaultClass" value="Knight" type="22" />
+                    <attribute id="PreviewEquipmentSet" value="Origin_RedPrince" type="22" />
+
+                	<children>
+                		<node id="SupportedGenders">
+                			<children>
+                                <node id="Gender">
+                                    <attribute id="Gender" value="Male" type="23" />
+                                </node>
+                			</children>
+                		</node>
+
+                		<node id="SupportedRaces">
+                			<children>
+                				<node id="SupportedRaces">
+                                    <attribute id="Object" value="Human" type="22" />
+                                </node>
+                			</children>
+                		</node>
+                	</children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

@@ -1,0 +1,77 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+RegionStarted(_)
+AND
+NOT DB_LLHUMAN_REDPRINCE_RaceFixed(_)
+AND
+NOT LLREDPRINCE_QRY_IsLizardRace(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+THEN
+DB_LLHUMAN_REDPRINCE_RaceFixed(1);
+
+IF
+RegionStarted(_)
+AND
+NOT DB_LLHUMAN_REDPRINCE_RaceFixed(_)
+//IsTagged(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "AVATAR", 0)
+AND
+LLREDPRINCE_QRY_IsLizardRace(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+AND
+DB_IsPlayer(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+THEN
+SysActivateGoal("LLHUMAN_REDPRINCE_99_TS_RaceFixStart");
+
+IF
+RegionStarted(_)
+AND
+NOT DB_LLHUMAN_REDPRINCE_RaceFixed(_)
+//IsTagged(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "AVATAR", 0)
+AND
+LLREDPRINCE_QRY_IsLizardRace(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+AND
+NOT DB_IsPlayer(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+THEN
+DB_LLHUMAN_REDPRINCE_RaceFix_Temp_RespecOnJoin(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f);
+
+IF
+CharacterJoinedParty(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+AND
+NOT DB_LLHUMAN_REDPRINCE_RaceFixed(_)
+AND
+NOT DB_LLHUMAN_REDPRINCE_RaceFix_Temp_RespecOnJoin(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+//IsTagged(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "AVATAR", 0)
+AND
+LLREDPRINCE_QRY_IsLizardRace(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+THEN
+ProcObjectTimerCancel(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Timers_LLHUMAN_REDPRINCE_RaceFixStart");
+ProcObjectTimer(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Timers_LLHUMAN_REDPRINCE_RaceFixStart", 250);
+
+IF
+CharacterJoinedParty(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+AND
+NOT DB_LLHUMAN_REDPRINCE_RaceFixed(_)
+AND
+DB_LLHUMAN_REDPRINCE_RaceFix_Temp_RespecOnJoin(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+THEN
+NOT DB_LLHUMAN_REDPRINCE_RaceFix_Temp_RespecOnJoin(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f);
+ProcObjectTimerCancel(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Timers_LLHUMAN_REDPRINCE_RaceFixStart");
+ProcObjectTimer(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, "Timers_LLHUMAN_REDPRINCE_RaceFixStart", 250);
+
+PROC
+Proc_ApplyPreset((CHARACTERGUID)S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f,(STRING)_Preset)
+AND
+NOT DB_LLREDPRINCE_RaceFixed(_)
+THEN
+DB_LLHUMAN_REDPRINCE_RaceFix_Temp_ChosenPreset(S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, _Preset);
+
+IF
+DB_LLHUMAN_REDPRINCE_RaceFixed(1)
+THEN
+GoalCompleted;
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "Start"

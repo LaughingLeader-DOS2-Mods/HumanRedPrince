@@ -1,0 +1,27 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+PROC
+PROC_SelectRandomStartOrigin()
+THEN
+PROC_TrySelectRandomStartOrigin(0,0, CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f);
+
+IF
+CharacterCreationFinished(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+AND
+CharacterGetRace(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, 0, _Race)
+THEN
+CharacterStatusText(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, _Race);
+
+IF
+CharacterCreationFinished(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f)
+AND
+CharacterGetOrigin(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, 0, _Origin)
+THEN
+CharacterStatusText(CHARACTERGUID_S_Player_RedPrince_a26a1efb-cdc8-4cf3-a7b2-b2f9544add6f, _Origin);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_HumanRedPrince"
